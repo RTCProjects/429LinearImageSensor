@@ -102,6 +102,7 @@ void	TCD1304_Task(void const * argument)
 
 		while(1)
 		{
+			osDelay(100);
 			xStatus=xQueueReceive(sensorADC1DataQueue, &tcdADCData, portMAX_DELAY);
 			if (xStatus == pdPASS) {
 

@@ -14,15 +14,10 @@ void	Process_Init()
 /*
  *
  */
-void	Process_BackgroundUpdate(uint16_t *pBackgroundData, uint8_t	ulIndex)
+void	Process_BackgroundUpdate(tDeviceStruct	*pDevice,uint16_t *pBackgroundData)
 {
-
-	if(ulIndex > TCD_SENSORS)
+	if(!pDevice || !pBackgroundData)
 		return;
-	if(!pBackgroundData)
-		return;
-
-	tDeviceStruct	*pDevice = &Devices[ulIndex];
 
 	if(pDevice->ulBackgroundIndex < BACKGROUND_SIZE)
 	{
@@ -50,7 +45,7 @@ void	Process_Update(uint16_t	*pData,uint8_t	ulIndex)
 
 	tDeviceStruct	*pDevice = &Devices[ulIndex];
 
-	Process_BackgroundUpdate(pData,ulIndex);
+	Process_BackgroundUpdate(pDevice,pData);
 
 	if(pDevice->ulQueryIndex < QUERY_SIZE)
 	{
@@ -71,16 +66,40 @@ void	Process_Update(uint16_t	*pData,uint8_t	ulIndex)
 		}
 		for(int i = 0;i<ARRAY_SIZE;i++)
 			pDevice->ulData[i] = pDevice->ulData[i] / QUERY_SIZE;
+
+		//оптическую плотность считаем только после накопления фона
+		if(pDevice->ulBackgroundIndex==BACKGROUND_SIZE)
+			Process_OpticalDensityCalculate(pDevice);
 	}
 }
 /*----------------------------------------------------------------------------------------------------*/
 /*
  *
  */
-uint16_t	*Process_GetChannelData(uint8_t	channel)
+void	Process_OpticalDensityCalculate(tDeviceStruct	*pDevice)
+{
+	for(int i = 0;i<ARRAY_SIZE;i++)
+	{
+		float fLogValue = log10((float)pDevice->ulBackgroundArray[i] * (float)TIM2->CCR1 / (float)pDevice->ulData[i]);
+		pDevice->ulOpticalData[i] = (uint16_t)(fLogValue * TIM2->CCR2);
+	}
+}
+/*----------------------------------------------------------------------------------------------------*/
+/*
+ *
+ */
+uint16_t	*Process_GetSourcelData(uint8_t	channel)
 {
 	if(channel < TCD_SENSORS)
 		return Devices[channel].ulData;
+	else
+		return 0;
+}
+/*----------------------------------------------------------------------------------------------------*/
+uint16_t	*Process_GetOpticalData(uint8_t	channel)
+{
+	if(channel < TCD_SENSORS)
+		return Devices[channel].ulOpticalData;
 	else
 		return 0;
 }

@@ -167,22 +167,21 @@ void mainTask(void const * argument)
 	//настройка и запуск драйвера CCD
 	TCD1304_Init();
 	TCD1304_Start();
-	//Main loop
+	//инициализация модуля для рассчета данных
 	Process_Init();
-
-	//memset(uBackgroundArray,0,sizeof(uint32_t) * ARRAY_SIZE);
-
+	//Main loop
 	for(;;)
 	{
-		//Process_Update(sendCopyBuf1,0);
+		//TO-DO данные будут передаваться по запросу, в данный момент реализована отладочная версия с непрерывной передачей с частотой 10Hz
+		Protocol_SendLinearSensorData(0x01,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
+		Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
 
-		Protocol_SendLinearSensorData(0x01,0,(uint8_t*)Process_GetChannelData(0));
-		Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetChannelData(1));
-		/*Protocol_SendLinearSensorData(0x02,0,(uint8_t*)sendCopyBuf2);
-		Protocol_SendLinearSensorData(0x03,0,(uint8_t*)sendCopyBuf3);
-		Protocol_SendLinearSensorData(0x04,0,(uint8_t*)sendCopyBuf4);*/
 
-						osDelay(100);
+		/*Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
+		Protocol_SendLinearSensorData(0x03,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_3));
+		Protocol_SendLinearSensorData(0x04,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_4));
+*/
+		osDelay(100);
 	}
 /*
 	for(;;)
