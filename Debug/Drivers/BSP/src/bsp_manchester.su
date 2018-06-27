@@ -1,0 +1,10 @@
+core_cm4.h:1745:26:NVIC_EncodePriority.constprop	0	static
+bsp_manchester.c:38:6:BSP_Manchester_Init	32	static
+bsp_manchester.c:114:9:BSP_Manchester_SendByte	0	static
+bsp_manchester.c:99:9:BSP_Manchester_SendData	8	static
+bsp_manchester.c:129:6:BSP_Manchester_TxEnd_Callback	0	static
+bsp_manchester.c:168:10:BSP_ByteToManEncode	12	static
+bsp_manchester.c:189:9:BSP_ManToByteDecode	8	static
+bsp_manchester.c:147:6:BSP_Manchester_RxEndCallback	16	static
+bsp_manchester.c:206:6:TIM6_DAC_IRQHandler	16	static
+bsp_manchester.c:246:6:TIM5_IRQHandler	16	static

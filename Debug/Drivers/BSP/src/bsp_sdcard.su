@@ -1,0 +1,5 @@
+bsp_sdcard.c:28:6:BSP_SDCard_Init	40	static
+bsp_sdcard.c:67:6:SD_Write	568	static
+bsp_sdcard.c:95:6:BSP_SDCard_WriteSensorsData	0	static
+bsp_sdcard.c:158:10:BSP_SDCard_GetFileNumbers	88	static
+bsp_sdcard.c:105:6:BSP_SDCard_Task	600	static

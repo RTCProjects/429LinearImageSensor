@@ -1,0 +1,14 @@
+sd_diskio.c:387:9:USER_status	0	static
+sd_diskio.c:124:6:xmit_spi	16	static
+sd_diskio.c:130:13:rcvr_spi	24	static
+sd_diskio.c:170:6:power_on	16	static
+sd_diskio.c:151:13:wait_ready	8	static
+sd_diskio.c:242:13:xmit_datablock	16	static
+sd_diskio.c:282:13:send_cmd	16	static
+sd_diskio.c:324:9:USER_initialize	32	static
+sd_diskio.c:435:9:USER_write	16	static
+sd_diskio.c:215:13:rcvr_datablock	16	static
+sd_diskio.c:398:9:USER_read	16	static
+sd_diskio.c:479:9:USER_ioctl	32	static
+sd_diskio.c:583:6:USER_timerproc	0	static
+sd_diskio.c:608:9:f_open_append	16	static

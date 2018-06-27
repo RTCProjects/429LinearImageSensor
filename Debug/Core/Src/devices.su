@@ -1,0 +1,2 @@
+devices.c:29:6:Devices_PackageAnalysis	16	static
+devices.c:100:6:Devices_SensorsDataRequest	0	static

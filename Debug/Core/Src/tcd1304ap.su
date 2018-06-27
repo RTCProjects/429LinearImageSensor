@@ -1,0 +1,7 @@
+tcd1304ap.c:99:6:TCD1304_Task	24	static
+tcd1304ap.c:37:6:TCD1304_Init	40	static
+tcd1304ap.c:76:6:TCD1304_Start	8	static
+tcd1304ap.c:89:6:TCD1304_Stop	8	static
+tcd1304ap.c:135:6:TCD1304_DataCallback	8	static
+tcd1304ap.c:155:6:HAL_TIM_PWM_PulseFinishedCallback	8	static
+tcd1304ap.c:179:6:TCD1304_SampleTimerCallback	16	static

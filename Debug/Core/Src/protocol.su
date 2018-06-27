@@ -1,0 +1,7 @@
+protocol.c:20:6:Protocol_Init	0	static
+protocol.c:33:10:Protocol_CreatePacket	32	static
+protocol.c:65:10:Protocol_GetPacketFromStream	32	static
+protocol.c:150:6:Protocol_SendLinearSensorDataPack	40	static
+protocol.c:175:6:Protocol_SendLinearSensorData	32	static
+protocol.c:183:6:Protocol_SendPingResponse	16	static
+protocol.c:198:6:Protocol_RxPackageAnalysis	0	static

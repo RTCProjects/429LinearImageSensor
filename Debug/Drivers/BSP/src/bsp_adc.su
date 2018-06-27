@@ -1,0 +1,6 @@
+bsp_adc.c:30:6:BSP_ADC_Init	8	static
+bsp_adc.c:130:6:BSP_ADC_Start	8	static
+bsp_adc.c:145:6:BSP_ADC_Stop	8	static
+bsp_adc.c:163:6:HAL_ADC_ConvCpltCallback	0	static
+bsp_adc.c:201:11:BSP_GetADCBuf1Value	0	static
+bsp_adc.c:210:11:BSP_GetADCBuf2Value	0	static

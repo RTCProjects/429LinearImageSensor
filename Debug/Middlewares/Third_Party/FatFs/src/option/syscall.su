@@ -1,0 +1,4 @@
+syscall.c:62:5:ff_cre_syncobj	16	static
+syscall.c:87:5:ff_del_syncobj	8	static
+syscall.c:104:5:ff_req_grant	8	static
+syscall.c:126:6:ff_rel_grant	0	static

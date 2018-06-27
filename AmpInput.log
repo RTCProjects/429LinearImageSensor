@@ -1,0 +1,50 @@
+Circuit: * D:\Atollic\429LinearImageSensor\AmpInput.asc
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+vernier = 0.0625
+Gmin = 0.00100083
+vernier = 0.03125
+vernier = 0.015625
+vernier = 0.0078125
+vernier = 0.00390625
+vernier = 0.00195313
+Gmin = 0.00100083
+vernier = 0.000976563
+vernier = 0.000488281
+Gmin = 0
+Gmin stepping failed
+
+Starting source stepping with srcstepmethod=0
+Source Step = 3.0303%
+Source Step = 33.3333%
+Source Step = 63.6364%
+Source Step = 93.9394%
+Source stepping succeeded in finding the operating point.
+
+
+Date: Wed Jun 20 16:43:12 2018
+Total elapsed time: 0.399 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 10853
+traniter = 9018
+tranpoints = 2543
+accept = 2069
+rejected = 474
+matrix size = 58
+fillins = 37
+solver = Normal
+Matrix Compiler1: 5.26 KB object code size  3.2/2.1/[0.6]
+Matrix Compiler2: 5.69 KB object code size  1.6/2.2/[0.7]
+

@@ -1,0 +1,4 @@
+process.c:9:6:Process_Init	0	static
+process.c:17:6:Process_BackgroundUpdate	20	static
+process.c:44:6:Process_Update	24	static
+process.c:80:11:Process_GetChannelData	0	static
