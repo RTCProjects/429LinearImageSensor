@@ -40,9 +40,10 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 192K
+RAM (xrw)        : ORIGIN = 0x20000000, LENGTH = 192K
 CCMRAM (rw)      : ORIGIN = 0x10000000, LENGTH = 64K
 FLASH  (rx)      : ORIGIN = 0x08000000, LENGTH = 1008K
+USERFLASH  (rx)  : ORIGIN = 0x080FC000, LENGTH = 16K
 }
 
 /* Define output sections */
@@ -171,6 +172,11 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(4);
   } >RAM
+  
+  .user_flash : 
+  {
+  	*(.user_flash)
+  } >USERFLASH
 
   
 

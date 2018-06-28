@@ -2,7 +2,7 @@
 #define _BSP_USB
 
 #define USB_RX_BUF_SIZE			64
-#define USB_TX_QUEUE_LEN		16
+#define USB_TX_QUEUE_LEN		64
 #define USB_RX_QUEUE_LEN		64
 #define USB_MAX_TX_PACKAGE		512
 

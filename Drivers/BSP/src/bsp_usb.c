@@ -63,10 +63,10 @@ void	BSP_Usb_TxTask(void const * argument)
 				//uint8_t *pPackage = protocol_CreatePackageForOutputStream(txMsg.Event,txMsg.Status,txMsg.DataSize,txMsg.pData,&pPackSize);
 				//if(pPackage)
 				
-					taskENTER_CRITICAL();
+					//taskENTER_CRITICAL();
 					CDC_Transmit_FS(txMsg.pData,txMsg.Len);
 					vPortFree(txMsg.pData);
-					taskEXIT_CRITICAL();
+					//taskEXIT_CRITICAL();
 					osDelay(1);
 					
 					//vPortFree(pPackage);
@@ -135,7 +135,7 @@ void BSP_Usb_SendPackage(uint8_t	*pData,uint16_t	Len)
 	txMsg.pData = pData;
 	txMsg.Len = Len;
 	
-	xQueueSendToBack(usbTxDataQueue,&txMsg,0);
+		xQueueSendToBack(usbTxDataQueue,&txMsg,0);
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**

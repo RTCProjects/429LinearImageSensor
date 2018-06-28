@@ -7,6 +7,7 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "cmsis_os.h"
+#include "tcd1304ap.h"
 
 #define TCD_CHANNEL_1		0x00
 #define TCD_CHANNEL_2		0x01
@@ -15,17 +16,16 @@
 
 #define TCD_SENSORS			4
 #define QUERY_SIZE			4
-#define ARRAY_SIZE			256
 #define BACKGROUND_SIZE		30
 
 typedef struct
 {
-	uint32_t	ulBackgroundArray[ARRAY_SIZE];			//данные фона
-	uint16_t	ulData[ARRAY_SIZE];						//текущие усредненные данные
-	uint16_t	ulOpticalData[ARRAY_SIZE];				//данные оптической плотности
-	uint16_t	ulQueryData[QUERY_SIZE][ARRAY_SIZE];	//очередь текущих данных
-	uint8_t		ulQueryIndex;							//индекс очереди
-	uint8_t		ulBackgroundIndex;						//индекс накопления фонового спектра
+	uint32_t	ulBackgroundArray[TCD1304_DATA_SIZE];			//данные фона
+	uint16_t	ulData[TCD1304_DATA_SIZE];						//текущие усредненные данные
+	uint16_t	ulOpticalData[TCD1304_DATA_SIZE];				//данные оптической плотности
+	uint16_t	ulQueryData[QUERY_SIZE][TCD1304_DATA_SIZE];		//очередь текущих данных
+	uint8_t		ulQueryIndex;									//индекс очереди
+	uint8_t		ulBackgroundIndex;								//индекс накопления фонового спектра
 }tDeviceStruct;
 
 void		Process_Init(void);

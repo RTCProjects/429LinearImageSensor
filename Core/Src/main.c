@@ -155,14 +155,16 @@ void mainTask(void const * argument)
 {
 	//Инициализация CDC_USB стека
 	BSP_Usb_Init();
-
+	//Инициализация FLASH
+	BSP_Flash_Init();
+	//Инициализация таймера выборки значений АЦП
 	BSP_TIM4ADC_Init();
 	//Иницализация двух АЦП модулей
 	BSP_ADC_Init(ADC_INIT_DMA_CONTCONV,1);
 	BSP_ADC_Init(ADC_INIT_DMA_CONTCONV,2);
 	//запуск ADC DMA для непрерываного преобразования
 	BSP_ADC_Start();
-	//Настройка ШИМ таймера
+	//Настройка ШИМ таймера для управления светом
 	BSP_TIM2PWM_Init();
 	//настройка и запуск драйвера CCD
 	TCD1304_Init();
@@ -174,12 +176,17 @@ void mainTask(void const * argument)
 	{
 		//TO-DO данные будут передаваться по запросу, в данный момент реализована отладочная версия с непрерывной передачей с частотой 10Hz
 		Protocol_SendLinearSensorData(0x01,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
-		//Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
+		Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
 
 
 		/*Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
+		Protocol_SendLinearSensorData(0x02,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_2));
+
 		Protocol_SendLinearSensorData(0x03,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_3));
+		Protocol_SendLinearSensorData(0x03,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_3));
+
 		Protocol_SendLinearSensorData(0x04,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_4));
+		Protocol_SendLinearSensorData(0x04,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_4));
 */
 		osDelay(100);
 	}

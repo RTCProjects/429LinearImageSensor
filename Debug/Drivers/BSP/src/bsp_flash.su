@@ -1,2 +1,5 @@
-bsp_flash.c:18:6:BSP_Flash_WriteBlock	24	static
-bsp_flash.c:60:6:BSP_Flash_ReadBlock	0	static
+bsp_flash.c:25:6:BSP_Flash_Init	40	static
+bsp_flash.c:33:6:BSP_Flash_StartWrite	0	static
+bsp_flash.c:55:6:BSP_Flash_WriteBlock	32	static
+bsp_flash.c:42:6:BSP_Flash_Task	8	static
+bsp_flash.c:101:6:BSP_Flash_ReadBlock	0	static

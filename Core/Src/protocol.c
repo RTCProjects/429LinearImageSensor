@@ -6,12 +6,15 @@
 /*----------------------------------------------------------------------------------------------------*/
 #include "protocol.h"
 #include "bsp_usb.h"
+#include "bsp_flash.h"
 #include <string.h>
 /*----------------------------------------------------------------------------------------------------*/
 extern uint16_t	sendCopyBuf1[];
 extern uint16_t	sendCopyBuf2[];
 extern uint16_t	sendCopyBuf3[];
 extern uint16_t	sendCopyBuf4[];
+
+static uint8_t	protocolOutputBuf[256];
 /*----------------------------------------------------------------------------------------------------*/
 /**
   * @brief	Функция инициализации
@@ -19,7 +22,7 @@ extern uint16_t	sendCopyBuf4[];
   */
 void Protocol_Init()
 {
-
+	memset(protocolOutputBuf,0,sizeof(uint8_t) * 256);
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -150,17 +153,17 @@ uint8_t	*Protocol_GetPacketFromStream(uint8_t *pDataBuf,int sDataBuf, int	*pData
 void Protocol_SendLinearSensorDataPack(uint8_t	linearNumber,uint8_t dataType,uint8_t packId,uint8_t	*pData,uint8_t	Len)
 {
 	uint8_t		packSize = 0;
-	uint8_t		*pModPackage = pvPortMalloc(Len + 2);
+	//uint8_t		*pModPackage = pvPortMalloc(Len + 2);
 
-	if(pModPackage)
+	if(/*pModPackage*/pData)
 	{
-		pModPackage[0] = dataType;
-		pModPackage[1] = packId;
-		memcpy(pModPackage + 2,pData,sizeof(uint8_t)*Len);
+		protocolOutputBuf[0] = dataType;
+		protocolOutputBuf[1] = packId;
+		memcpy(protocolOutputBuf + 2,pData,sizeof(uint8_t)*Len);
 
-		uint8_t		*pPackage = Protocol_CreatePacket(linearNumber,pModPackage,Len + 2,&packSize);
+		uint8_t		*pPackage = Protocol_CreatePacket(linearNumber,protocolOutputBuf,Len + 2,&packSize);
 		if(pPackage){
-			vPortFree(pModPackage);
+			//vPortFree(pModPackage);
 			BSP_Usb_SendPackage(pPackage,packSize);
 			}
 	}
@@ -217,7 +220,7 @@ void Protocol_RxPackageAnalysis(uint8_t	*pPackage)
 				case 0x01:	TIM2->CCR1 = PWMValue; 	break;
 				case 0x02:	TIM2->CCR2 = PWMValue; 	break;
 				case 0x03:	TIM2->CCR3 = PWMValue;	break;
-				case 0x04:	TIM2->CCR4 = PWMValue;	break;
+				case 0x04:	{TIM2->CCR4 = PWMValue; BSP_Flash_StartWrite();}	break;
 			}
 
 		}break;

@@ -25,7 +25,7 @@ void	BSP_TIM2PWM_Init()
 	Tim2PWMHandle.Init.CounterMode   = TIM_COUNTERMODE_UP;
 
 	if(HAL_TIM_PWM_Init(&Tim2PWMHandle) != HAL_OK){
-			Error_Handler();
+		Error_Handler();
 	}
 
 	sConfigPWM.OCMode     = TIM_OCMODE_PWM1;
@@ -34,17 +34,17 @@ void	BSP_TIM2PWM_Init()
 
 	sConfigPWM.Pulse = 0x64;
 	if(HAL_TIM_PWM_ConfigChannel(&Tim2PWMHandle, &sConfigPWM, TIM_CHANNEL_1) != HAL_OK){
-			  Error_Handler();
+		Error_Handler();
 	}
 
-	sConfigPWM.Pulse = 1000;
+	sConfigPWM.Pulse = 4096;
 	if(HAL_TIM_PWM_ConfigChannel(&Tim2PWMHandle, &sConfigPWM, TIM_CHANNEL_2) != HAL_OK){
-				  Error_Handler();
+		Error_Handler();
 	}
 
-	sConfigPWM.Pulse = 3000;
+	sConfigPWM.Pulse = 2;
 	if(HAL_TIM_PWM_ConfigChannel(&Tim2PWMHandle, &sConfigPWM, TIM_CHANNEL_3) != HAL_OK){
-					  Error_Handler();
+		Error_Handler();
 	}
 
 	BSP_TIM2PWM_Start();

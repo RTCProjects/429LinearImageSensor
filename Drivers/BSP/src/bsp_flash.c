@@ -6,10 +6,47 @@
 /*----------------------------------------------------------------------------------------------------*/
 #include "bsp_flash.h"
 
-static FLASH_EraseInitTypeDef EraseInitStruct;
 
+static FLASH_EraseInitTypeDef EraseInitStruct;
 static uint32_t BSP_Flash_GetSector(uint32_t Address);
 static uint32_t BSP_Flash_GetSectorSize(uint32_t Sector);
+
+osThreadId 		 flashTaskHandle;
+xSemaphoreHandle xFlashWriteSemaphore;
+tSaveData		 SaveData USER_FLASH;
+
+void BSP_Flash_Task(void const * argument);
+
+/*----------------------------------------------------------------------------------------------------*/
+/**
+  * @brief  Инициализация потока записи во флеш
+  * @retval None
+  */
+void	BSP_Flash_Init()
+{
+	memset(&SaveData,0,sizeof(tSaveData));
+	vSemaphoreCreateBinary(xFlashWriteSemaphore);
+
+	osThreadDef(flashTask, BSP_Flash_Task, osPriorityRealtime, 0, configMINIMAL_STACK_SIZE + 128);
+	flashTaskHandle = osThreadCreate(osThread(flashTask), NULL);
+}
+void	BSP_Flash_StartWrite()
+{
+	xSemaphoreGive(xFlashWriteSemaphore);
+}
+/*----------------------------------------------------------------------------------------------------*/
+/**
+  * @brief  Task записи во флеш
+  * @retval None
+  */
+void BSP_Flash_Task(void const * argument)
+{
+	while(1)
+	{
+		BSP_Flash_WriteBlock((uint8_t*)Process_GetSourcelData(0),TCD1304_DATA_SIZE * sizeof(uint16_t));
+		xSemaphoreTake( xFlashWriteSemaphore, portMAX_DELAY );
+	}
+}
 /*----------------------------------------------------------------------------------------------------*/
 /**
   * @brief  The application entry point.
@@ -25,13 +62,16 @@ void	BSP_Flash_WriteBlock(uint8_t	*pData,uint16_t	Size)
 	 * - пишем блок данных
 	 */
 	 uint32_t SectorError = 0;
-	 uint32_t Address = ADDR_FLASH_SECTOR_0;
+	 uint32_t Address = 0x80FC000;
+	 uint16_t AddressIndex = 0;
 
 	 HAL_FLASH_Unlock();
+	 __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR |
+	                        FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR);
 
        EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
 	   EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
-	   EraseInitStruct.Sector = BSP_Flash_GetSector(ADDR_FLASH_SECTOR_0);
+	   EraseInitStruct.Sector = FLASH_SECTOR_11;
 	   EraseInitStruct.NbSectors = 1;
 	   if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK){
 		   Error_Handler();
@@ -46,9 +86,10 @@ void	BSP_Flash_WriteBlock(uint8_t	*pData,uint16_t	Size)
 	 __HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
 	 __HAL_FLASH_DATA_CACHE_ENABLE();
 
-	 while(Address < 512){
-		 HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address,*(pData + 4));
-		Address+=4;
+
+	 while(AddressIndex < 512){
+		 HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, Address + AddressIndex,*(pData + AddressIndex));
+		 AddressIndex+=2;
 	 }
 	 HAL_FLASH_Lock();
 }
@@ -196,3 +237,4 @@ static uint32_t BSP_Flash_GetSectorSize(uint32_t Sector)
   }
   return sectorsize;
 }
+/*----------------------------------------------------------------------------------------------------*/

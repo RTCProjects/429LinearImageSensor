@@ -1,8 +1,13 @@
 #ifndef BSP_INC_BSP_FLASH_H_
 #define BSP_INC_BSP_FLASH_H_
 
+#include "main.h"
 #include "stm32f4xx_hal.h"
 #include "cmsis_os.h"
+#include "tcd1304ap.h"
+#include "process.h"
+
+#include <string.h>
 
 #define ADDR_FLASH_SECTOR_0     ((uint32_t)0x08000000) /* Base @ of Sector 0, 16 Kbytes */
 #define ADDR_FLASH_SECTOR_1     ((uint32_t)0x08004000) /* Base @ of Sector 1, 16 Kbytes */
@@ -31,7 +36,17 @@
 #define ADDR_FLASH_SECTOR_22     ((uint32_t)0x081C0000) /* Base @ of Sector 10, 128 Kbytes */
 #define ADDR_FLASH_SECTOR_23     ((uint32_t)0x081E0000) /* Base @ of Sector 11, 128 Kbytes */
 
+typedef struct
+{
+	uint16_t	ulDataChannel1[TCD1304_DATA_SIZE];
+	uint16_t	ulDataChannel2[TCD1304_DATA_SIZE];
+	uint16_t	ulDataChannel3[TCD1304_DATA_SIZE];
+	uint16_t	ulDataChannel4[TCD1304_DATA_SIZE];
+}tSaveData;
+
+void	BSP_Flash_Init(void);
 void	BSP_Flash_WriteBlock(uint8_t	*pData,uint16_t	Size);
 void	BSP_Flash_ReadBlock(uint8_t	*pData,uint16_t	Size);
+void	BSP_Flash_StartWrite(void);
 
 #endif

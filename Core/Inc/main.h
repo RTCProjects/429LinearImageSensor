@@ -57,6 +57,7 @@
 #include <stdint.h>
 
 #define CCM_SRAM	__attribute__ ((section(".ccmram")))
+#define USER_FLASH	__attribute__ ((section(".user_flash")))
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
