@@ -121,7 +121,7 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 	  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
 	  GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
 
-	  GPIO_InitStruct.Pin = GPIO_PIN_6;
+	  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
 	  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 	  //инициализация ICG

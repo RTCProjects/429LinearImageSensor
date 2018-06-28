@@ -49,8 +49,8 @@ void	TCD1304_Init()
 
 	Tim3PWMHandle.Instance = TIM3;
 
-	Tim3PWMHandle.Init.Prescaler     = 4;
-	Tim3PWMHandle.Init.Period        = 200 - 1;
+	Tim3PWMHandle.Init.Prescaler     = 5;//4;
+	Tim3PWMHandle.Init.Period        = 55999;//200 - 1;
 	Tim3PWMHandle.Init.ClockDivision = 0;
 	Tim3PWMHandle.Init.CounterMode   = TIM_COUNTERMODE_UP;
 
@@ -67,6 +67,12 @@ void	TCD1304_Init()
 	if(HAL_TIM_PWM_ConfigChannel(&Tim3PWMHandle, &sConfigPWM, TIM_CHANNEL_1) != HAL_OK){
 		  Error_Handler();
 		}
+	sConfigPWM.OCMode     = TIM_OCMODE_PWM2;
+
+	if(HAL_TIM_PWM_ConfigChannel(&Tim3PWMHandle, &sConfigPWM, TIM_CHANNEL_2) != HAL_OK){
+		  Error_Handler();
+		}
+
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -80,6 +86,8 @@ void	TCD1304_Start()
 
 	if(HAL_TIM_PWM_Start_IT(&Tim3PWMHandle, TIM_CHANNEL_1) != HAL_OK)
 		Error_Handler();
+	if(HAL_TIM_PWM_Start_IT(&Tim3PWMHandle, TIM_CHANNEL_2) != HAL_OK)
+			Error_Handler();
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -90,6 +98,9 @@ void	TCD1304_Stop()
 {
 	if(HAL_TIM_PWM_Stop_IT(&Tim3PWMHandle, TIM_CHANNEL_1) != HAL_OK)
 		Error_Handler();
+	if(HAL_TIM_PWM_Stop_IT(&Tim3PWMHandle, TIM_CHANNEL_2) != HAL_OK)
+			Error_Handler();
+
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -155,6 +166,7 @@ void	TCD1304_DataCallback(tTCDADCData	*adcValue)
   */
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *hTim)
 {
+	/*
 	//прерывание от каждого периода ШИМ
 	if(hTim->Instance == TIM3)
 	{
@@ -169,8 +181,14 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *hTim)
 		}
 		icgTick++;
 	}
+	*/
+	if(hTim->Instance == TIM3)
+	{
 
+	}
 }
+
+
 /*----------------------------------------------------------------------------------------------------*/
 /**
   * @brief	обработчик прерывания от TimerADCSample.

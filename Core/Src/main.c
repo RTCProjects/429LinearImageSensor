@@ -264,12 +264,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   if(htim->Instance == TIM7){
-	  ulHighFrequencyTimerTicks++;
+	ulHighFrequencyTimerTicks++;
   }
-	if(htim->Instance == TIM4)
-	{
-		TCD1304_SampleTimerCallback();
-	}
+  if(htim->Instance == TIM4)
+  {
+	TCD1304_SampleTimerCallback();
+  }
+
 }
 /*
  *
