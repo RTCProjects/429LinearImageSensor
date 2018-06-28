@@ -20,7 +20,7 @@ void	BSP_TIM2PWM_Init()
 	Tim2PWMHandle.Instance = TIM2;
 
 	Tim2PWMHandle.Init.Prescaler     = 8;
-	Tim2PWMHandle.Init.Period        = 0xFFFF - 1;
+	Tim2PWMHandle.Init.Period        = 0x4000 - 1;
 	Tim2PWMHandle.Init.ClockDivision = 0;
 	Tim2PWMHandle.Init.CounterMode   = TIM_COUNTERMODE_UP;
 
@@ -32,7 +32,7 @@ void	BSP_TIM2PWM_Init()
 	sConfigPWM.OCPolarity = TIM_OCPOLARITY_HIGH;
 	sConfigPWM.OCFastMode = TIM_OCFAST_DISABLE;
 
-	sConfigPWM.Pulse = 1;
+	sConfigPWM.Pulse = 0x64;
 	if(HAL_TIM_PWM_ConfigChannel(&Tim2PWMHandle, &sConfigPWM, TIM_CHANNEL_1) != HAL_OK){
 			  Error_Handler();
 	}
@@ -47,6 +47,8 @@ void	BSP_TIM2PWM_Init()
 					  Error_Handler();
 	}
 
+	BSP_TIM2PWM_Start();
+
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -56,7 +58,7 @@ void	BSP_TIM2PWM_Init()
   */
 void	BSP_TIM2PWM_Start()
 {
-	if(HAL_TIM_PWM_Start_IT(&Tim2PWMHandle, TIM_CHANNEL_1|TIM_CHANNEL_2|TIM_CHANNEL_3) != HAL_OK)
+	if(HAL_TIM_PWM_Start(&Tim2PWMHandle, TIM_CHANNEL_1) != HAL_OK)
 			Error_Handler();
 }
 /*----------------------------------------------------------------------------------------------------*/
@@ -67,7 +69,7 @@ void	BSP_TIM2PWM_Start()
   */
 void 	BSP_TIM2PWM_Stop()
 {
-	if(HAL_TIM_PWM_Stop_IT(&Tim2PWMHandle, TIM_CHANNEL_1|TIM_CHANNEL_2|TIM_CHANNEL_3) != HAL_OK)
+	if(HAL_TIM_PWM_Stop(&Tim2PWMHandle, TIM_CHANNEL_1) != HAL_OK)
 		Error_Handler();
 }
 /*----------------------------------------------------------------------------------------------------*/

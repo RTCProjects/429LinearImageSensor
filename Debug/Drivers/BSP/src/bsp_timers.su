@@ -1,6 +1,6 @@
+bsp_timers.c:59:6:BSP_TIM2PWM_Start	8	static
 bsp_timers.c:18:6:BSP_TIM2PWM_Init	8	static
-bsp_timers.c:57:6:BSP_TIM2PWM_Start	8	static
-bsp_timers.c:68:7:BSP_TIM2PWM_Stop	8	static
-bsp_timers.c:78:6:BSP_TIM4ADC_Init	8	static
-bsp_timers.c:100:6:BSP_TIM4ADC_Start	8	static
-bsp_timers.c:111:6:BSP_TIM4ADC_Stop	8	static
+bsp_timers.c:70:7:BSP_TIM2PWM_Stop	8	static
+bsp_timers.c:80:6:BSP_TIM4ADC_Init	8	static
+bsp_timers.c:102:6:BSP_TIM4ADC_Start	8	static
+bsp_timers.c:113:6:BSP_TIM4ADC_Stop	8	static

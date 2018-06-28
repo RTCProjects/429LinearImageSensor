@@ -162,7 +162,7 @@ void mainTask(void const * argument)
 	BSP_ADC_Init(ADC_INIT_DMA_CONTCONV,2);
 	//запуск ADC DMA для непрерываного преобразования
 	BSP_ADC_Start();
-	//Настройка ШИМ таймера для тактирования CCD линеек
+	//Настройка ШИМ таймера
 	BSP_TIM2PWM_Init();
 	//настройка и запуск драйвера CCD
 	TCD1304_Init();
@@ -174,7 +174,7 @@ void mainTask(void const * argument)
 	{
 		//TO-DO данные будут передаваться по запросу, в данный момент реализована отладочная версия с непрерывной передачей с частотой 10Hz
 		Protocol_SendLinearSensorData(0x01,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
-		Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
+		//Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
 
 
 		/*Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
