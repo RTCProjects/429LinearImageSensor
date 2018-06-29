@@ -125,7 +125,7 @@ void	TCD1304_Task(void const * argument)
 					//memcpy(sendCopyBuf4,pADCData4,sizeof(uint16_t) * 256);
 				}
 			}
-			osDelay(100);
+			osDelay(10);
 		}
 }
 /*----------------------------------------------------------------------------------------------------*/
@@ -190,7 +190,7 @@ void TCD1304_SampleTimerCallback()
 		adcTCDPack[0].Data[ulADCSampleCounter + TCD1304_DATA_SIZE] = TCD1304_ADC_MAX_VALUE - adcBuf_1[1];
 
 		adcTCDPack[1].Adc = 2;
-		adcTCDPack[1].Data[ulADCSampleCounter] = 4096 - adcBuf_2[0];
+		adcTCDPack[1].Data[ulADCSampleCounter] = TCD1304_ADC_MAX_VALUE - adcBuf_2[0];
 		adcTCDPack[1].Data[ulADCSampleCounter + TCD1304_DATA_SIZE] = TCD1304_ADC_MAX_VALUE - adcBuf_2[1];
 
 		ulADCSampleCounter++;
@@ -198,7 +198,6 @@ void TCD1304_SampleTimerCallback()
 	else
 	{
 		BSP_TIM4ADC_Stop();
-
 		TCD1304_DataCallback(&adcTCDPack[0]);
 		TCD1304_DataCallback(&adcTCDPack[1]);
 

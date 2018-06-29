@@ -57,15 +57,21 @@ void	Process_Update(uint16_t	*pData,uint8_t	ulIndex)
 		memcpy(&pDevice->ulQueryData[0],&pDevice->ulQueryData[1],sizeof(uint16_t) * TCD1304_DATA_SIZE * (QUERY_SIZE - 1));
 		memcpy(&pDevice->ulQueryData[(QUERY_SIZE - 1)],pData,sizeof(uint16_t) * TCD1304_DATA_SIZE);
 
-		memset(pDevice->ulData,0,sizeof(uint16_t) * TCD1304_DATA_SIZE);
+		uint16_t	ulData[TCD1304_DATA_SIZE];
+		memset(ulData,0,sizeof(uint16_t) * TCD1304_DATA_SIZE);
+		//memset(pDevice->ulData,0,sizeof(uint16_t) * TCD1304_DATA_SIZE);
 
 		for(int i = 0;i<QUERY_SIZE;i++){
 			for(int j = 0;j<TCD1304_DATA_SIZE;j++){
-				pDevice->ulData[j]+=pDevice->ulQueryData[i][j];
+				ulData[j]+=pDevice->ulQueryData[i][j];
 			}
 		}
 		for(int i = 0;i<TCD1304_DATA_SIZE;i++)
-			pDevice->ulData[i] = pDevice->ulData[i] / QUERY_SIZE;
+			ulData[i] = ulData[i] / QUERY_SIZE;
+
+		taskENTER_CRITICAL();
+		memcpy(pDevice->ulData,ulData,sizeof(uint16_t) * TCD1304_DATA_SIZE);
+		taskEXIT_CRITICAL();
 
 		//оптическую плотность считаем только после накопления фона
 		if(pDevice->ulBackgroundIndex==BACKGROUND_SIZE)

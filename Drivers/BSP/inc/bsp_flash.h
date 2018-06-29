@@ -1,6 +1,8 @@
 #ifndef BSP_INC_BSP_FLASH_H_
 #define BSP_INC_BSP_FLASH_H_
 
+#define TCD_FLASH_DATA	0x0800C000
+
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "cmsis_os.h"
@@ -44,9 +46,10 @@ typedef struct
 	uint16_t	ulDataChannel4[TCD1304_DATA_SIZE];
 }tSaveData;
 
-void	BSP_Flash_Init(void);
-void	BSP_Flash_WriteBlock(uint8_t	*pData,uint16_t	Size);
-void	BSP_Flash_ReadBlock(uint8_t	*pData,uint16_t	Size);
-void	BSP_Flash_StartWrite(void);
+void		BSP_Flash_Init(void);
+void		BSP_Flash_WriteData(void);
+void		BSP_Flash_ReadBlock(uint16_t	*pData,uint16_t	Size);
+void		BSP_Flash_StartWrite(void);
+uint32_t	*BSP_Flash_ReadData(uint8_t	channel);
 
 #endif

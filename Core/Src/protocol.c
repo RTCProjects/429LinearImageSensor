@@ -9,10 +9,6 @@
 #include "bsp_flash.h"
 #include <string.h>
 /*----------------------------------------------------------------------------------------------------*/
-extern uint16_t	sendCopyBuf1[];
-extern uint16_t	sendCopyBuf2[];
-extern uint16_t	sendCopyBuf3[];
-extern uint16_t	sendCopyBuf4[];
 
 static uint8_t	protocolOutputBuf[256];
 /*----------------------------------------------------------------------------------------------------*/
@@ -189,7 +185,7 @@ void Protocol_SendPingResponse()
 	uint8_t		*pPackage = Protocol_CreatePacket(LIN_DATA_PING_RESPONSE,0,0,&packSize);
 
 	if(pPackage){
-				BSP_Usb_SendPackage(pPackage,packSize);
+		BSP_Usb_SendPackage(pPackage,packSize);
 	}
 }
 /*----------------------------------------------------------------------------------------------------*/
@@ -202,11 +198,6 @@ void Protocol_RxPackageAnalysis(uint8_t	*pPackage)
 {
 	uint8_t	Code = pPackage[2];
 	uint8_t	dataType = 0;
-
-	uint16_t	*pLinear1 = sendCopyBuf1;
-	uint16_t	*pLinear2 = sendCopyBuf2;
-	uint16_t	*pLinear3 = sendCopyBuf3;
-	uint16_t	*pLinear4 = sendCopyBuf4;
 
 	switch(Code)
 	{
@@ -232,26 +223,42 @@ void Protocol_RxPackageAnalysis(uint8_t	*pPackage)
 
 		case LIN_DATA_SENSOR1_REQUEST:
 		{
-			dataType = pPackage[3];
-			//Protocol_SendLinearSensorData(LIN_DATA_SENSOR1_RESPONSE,dataType,(uint8_t*)pLinear1);
+			if(pPackage[3] == 0x01){
+				BSP_Flash_StartWrite();
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR1_RESPONSE,pPackage[3],(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
+			}
+			if(pPackage[3] == 0x02)
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR1_RESPONSE,pPackage[3],(uint8_t*)BSP_Flash_ReadData(TCD_CHANNEL_1));
 		}break;
 
 		case LIN_DATA_SENSOR2_REQUEST:
 		{
-			dataType = pPackage[3];
-			//Protocol_SendLinearSensorData(LIN_DATA_SENSOR2_RESPONSE,dataType,(uint8_t*)pLinear2);
+			if(pPackage[3] == 0x01){
+				BSP_Flash_StartWrite();
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR2_RESPONSE,pPackage[3],(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
+			}
+			if(pPackage[3] == 0x02)
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR2_RESPONSE,pPackage[3],(uint8_t*)BSP_Flash_ReadData(TCD_CHANNEL_2));
 		}break;
 
 		case LIN_DATA_SENSOR3_REQUEST:
 		{
-			dataType = pPackage[3];
-			//Protocol_SendLinearSensorData(LIN_DATA_SENSOR3_RESPONSE,dataType,(uint8_t*)pLinear3);
+			if(pPackage[3] == 0x01){
+				BSP_Flash_StartWrite();
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR3_RESPONSE,pPackage[3],(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_3));
+			}
+			if(pPackage[3] == 0x02)
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR3_RESPONSE,pPackage[3],(uint8_t*)BSP_Flash_ReadData(TCD_CHANNEL_3));
 		}break;
 
 		case LIN_DATA_SENSOR4_REQUEST:
 		{
-			dataType = pPackage[3];
-			//Protocol_SendLinearSensorData(LIN_DATA_SENSOR4_RESPONSE,dataType,(uint8_t*)pLinear4);
+			if(pPackage[3] == 0x01){
+				BSP_Flash_StartWrite();
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR4_RESPONSE,pPackage[3],(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_4));
+			}
+			if(pPackage[3] == 0x02)
+				Protocol_SendLinearSensorData(LIN_DATA_SENSOR4_RESPONSE,pPackage[3],(uint8_t*)BSP_Flash_ReadData(TCD_CHANNEL_4));
 		}break;
 /*
 		case LIN_DATA_SENSOR5_REQUEST:

@@ -1,6 +1,6 @@
 process.c:9:6:Process_Init	0	static
 process.c:17:6:Process_BackgroundUpdate	20	static
-process.c:79:6:Process_OpticalDensityCalculate	32	static
-process.c:39:6:Process_Update	32	static
-process.c:91:11:Process_GetSourcelData	0	static
-process.c:99:11:Process_GetOpticalData	0	static
+process.c:85:6:Process_OpticalDensityCalculate	32	static
+process.c:39:6:Process_Update	544	static
+process.c:97:11:Process_GetSourcelData	0	static
+process.c:105:11:Process_GetOpticalData	0	static

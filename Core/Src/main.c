@@ -175,11 +175,11 @@ void mainTask(void const * argument)
 	for(;;)
 	{
 		//TO-DO данные будут передаваться по запросу, в данный момент реализована отладочная версия с непрерывной передачей с частотой 10Hz
-		Protocol_SendLinearSensorData(0x01,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
-		Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
+		/*Protocol_SendLinearSensorData(0x01,1,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_1));
+		Protocol_SendLinearSensorData(0x01,2,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_1));
 
 
-		/*Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
+		Protocol_SendLinearSensorData(0x02,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_2));
 		Protocol_SendLinearSensorData(0x02,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_2));
 
 		Protocol_SendLinearSensorData(0x03,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_3));
@@ -188,7 +188,7 @@ void mainTask(void const * argument)
 		Protocol_SendLinearSensorData(0x04,0,(uint8_t*)Process_GetSourcelData(TCD_CHANNEL_4));
 		Protocol_SendLinearSensorData(0x04,1,(uint8_t*)Process_GetOpticalData(TCD_CHANNEL_4));
 */
-		osDelay(100);
+		osDelay(1000);
 	}
 /*
 	for(;;)
