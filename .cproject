@@ -43,7 +43,7 @@
 									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Atollic\429LinearImageSensor\Middlewares\Third_Party\FreeRTOS\Source\include&quot;"/>
+									<listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/include"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Atollic\429LinearImageSensor\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Atollic\429LinearImageSensor\Middlewares\ST\STM32_USB_Device_Library\Core\Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Atollic\429LinearImageSensor\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc&quot;"/>

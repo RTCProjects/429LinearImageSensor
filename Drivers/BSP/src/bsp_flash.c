@@ -9,7 +9,6 @@
 
 static FLASH_EraseInitTypeDef EraseInitStruct;
 static uint32_t BSP_Flash_GetSector(uint32_t Address);
-static uint32_t BSP_Flash_GetSectorSize(uint32_t Sector);
 
 osThreadId 		 flashTaskHandle;
 xSemaphoreHandle xFlashWriteSemaphore;
@@ -99,8 +98,9 @@ void	BSP_Flash_WriteData()
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
-  * @brief  The application entry point.
-  * @retval None
+  * @brief  Функция чтения сохраненного спектра из Flash памяти
+  * @param	channel: Номер спектрального канала
+  * @retval Указатель на массив спектра
   */
 uint32_t	*BSP_Flash_ReadData(uint8_t	channel)
 {
@@ -224,28 +224,4 @@ static uint32_t BSP_Flash_GetSector(uint32_t Address)
   return sector;
 }
 /*----------------------------------------------------------------------------------------------------*/
-/**
-  * @brief  Gets sector Size
-  * @param  None
-  * @retval The size of a given sector
-  */
-static uint32_t BSP_Flash_GetSectorSize(uint32_t Sector)
-{
-  uint32_t sectorsize = 0x00;
-  if((Sector == FLASH_SECTOR_0) || (Sector == FLASH_SECTOR_1) || (Sector == FLASH_SECTOR_2) ||\
-     (Sector == FLASH_SECTOR_3) || (Sector == FLASH_SECTOR_12) || (Sector == FLASH_SECTOR_13) ||\
-     (Sector == FLASH_SECTOR_14) || (Sector == FLASH_SECTOR_15))
-  {
-    sectorsize = 16 * 1024;
-  }
-  else if((Sector == FLASH_SECTOR_4) || (Sector == FLASH_SECTOR_16))
-  {
-    sectorsize = 64 * 1024;
-  }
-  else
-  {
-    sectorsize = 128 * 1024;
-  }
-  return sectorsize;
-}
-/*----------------------------------------------------------------------------------------------------*/
+

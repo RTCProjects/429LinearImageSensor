@@ -197,7 +197,6 @@ void Protocol_SendPingResponse()
 void Protocol_RxPackageAnalysis(uint8_t	*pPackage)
 {
 	uint8_t	Code = pPackage[2];
-	uint8_t	dataType = 0;
 
 	switch(Code)
 	{

@@ -25,23 +25,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  10 .ARM.attributes 00000030  00000000  00000000  00034010  2**0
                   CONTENTS, READONLY
- 11 .debug_info   000364da  00000000  00000000  00034040  2**0
+ 11 .debug_info   000364ce  00000000  00000000  00034040  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_abbrev 00007370  00000000  00000000  0006a51a  2**0
+ 12 .debug_abbrev 00007361  00000000  00000000  0006a50e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_loc    0000de45  00000000  00000000  0007188a  2**0
+ 13 .debug_loc    0000de45  00000000  00000000  0007186f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001748  00000000  00000000  0007f6d0  2**3
+ 14 .debug_aranges 00001748  00000000  00000000  0007f6b8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001bd8  00000000  00000000  00080e18  2**3
+ 15 .debug_ranges 00001bd8  00000000  00000000  00080e00  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_line   0000e45f  00000000  00000000  000829f0  2**0
+ 16 .debug_line   0000e320  00000000  00000000  000829d8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_str    0000838a  00000000  00000000  00090e4f  2**0
+ 17 .debug_str    0000838a  00000000  00000000  00090cf8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .comment      0000007c  00000000  00000000  000991d9  2**0
+ 18 .comment      0000007c  00000000  00000000  00099082  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  00004738  00000000  00000000  00099258  2**2
+ 19 .debug_frame  00004738  00000000  00000000  00099100  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2182,7 +2182,6 @@ void Protocol_RxPackageAnalysis(uint8_t	*pPackage)
 {
  800148c:	b570      	push	{r4, r5, r6, lr}
 	uint8_t	Code = pPackage[2];
-	uint8_t	dataType = 0;
 
 	switch(Code)
  800148e:	7883      	ldrb	r3, [r0, #2]
@@ -4087,7 +4086,7 @@ void	BSP_Flash_WriteData()
  8001eaa:	f001 f81b 	bl	8002ee4 <HAL_FLASHEx_Erase>
  8001eae:	b118      	cbz	r0, 8001eb8 <BSP_Flash_WriteData+0x34>
 		   Error_Handler();
- 8001eb0:	214d      	movs	r1, #77	; 0x4d
+ 8001eb0:	214c      	movs	r1, #76	; 0x4c
  8001eb2:	4820      	ldr	r0, [pc, #128]	; (8001f34 <BSP_Flash_WriteData+0xb0>)
  8001eb4:	f7ff f908 	bl	80010c8 <_Error_Handler>
 	   }
