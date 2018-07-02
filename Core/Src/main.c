@@ -131,26 +131,6 @@ void portClkInit(void)
 	*/
 
 /*----------------------------------------------------------------------------------------------------*/
-
-extern uint16_t sendCopyBuf1[];
-extern uint16_t sendCopyBuf2[];
-extern uint16_t sendCopyBuf3[];
-extern uint16_t sendCopyBuf4[];
-/*
-#define QUERY_SIZE			4
-#define ARRAY_SIZE			192
-#define BACKGROUND_SIZE		30
-
-static uint16_t 	 uQueryData[QUERY_SIZE][ARRAY_SIZE];
-uint16_t	 uSendData[ARRAY_SIZE];
-uint16_t	 uSendScaleData[ARRAY_SIZE];
-uint32_t	 uSumData[ARRAY_SIZE];
-uint8_t	 	 uQueryIndex = 0;
-
-uint8_t		 uBackgroundReady = 0;
-uint32_t 	 uBackgroundArray[ARRAY_SIZE];
-*/
-
 void mainTask(void const * argument)
 {
 	//Инициализация CDC_USB стека

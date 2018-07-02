@@ -25,23 +25,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  10 .ARM.attributes 00000030  00000000  00000000  00034010  2**0
                   CONTENTS, READONLY
- 11 .debug_info   000364ce  00000000  00000000  00034040  2**0
+ 11 .debug_info   00036494  00000000  00000000  00034040  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_abbrev 00007361  00000000  00000000  0006a50e  2**0
+ 12 .debug_abbrev 0000733c  00000000  00000000  0006a4d4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_loc    0000de45  00000000  00000000  0007186f  2**0
+ 13 .debug_loc    0000de45  00000000  00000000  00071810  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001748  00000000  00000000  0007f6b8  2**3
+ 14 .debug_aranges 00001748  00000000  00000000  0007f658  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001bd8  00000000  00000000  00080e00  2**3
+ 15 .debug_ranges 00001bd8  00000000  00000000  00080da0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_line   0000e320  00000000  00000000  000829d8  2**0
+ 16 .debug_line   0000e31c  00000000  00000000  00082978  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_str    0000838a  00000000  00000000  00090cf8  2**0
+ 17 .debug_str    00008356  00000000  00000000  00090c94  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .comment      0000007c  00000000  00000000  00099082  2**0
+ 18 .comment      0000007c  00000000  00000000  00098fea  2**0
                   CONTENTS, READONLY
- 19 .debug_frame  00004738  00000000  00000000  00099100  2**2
+ 19 .debug_frame  00004738  00000000  00000000  00099068  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1156,10 +1156,10 @@ Disassembly of section .text:
  8000e6e:	bf00      	nop
 
 08000e70 <mainTask>:
-uint8_t		 uBackgroundReady = 0;
-uint32_t 	 uBackgroundArray[ARRAY_SIZE];
-*/
+	* @reval			None
+	*/
 
+/*----------------------------------------------------------------------------------------------------*/
 void mainTask(void const * argument)
 {
  8000e70:	b508      	push	{r3, lr}
@@ -3309,7 +3309,6 @@ void	TCD1304_Task(void const * argument)
 {
  8001a68:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
 		portBASE_TYPE			 xStatus;
-
 		while(1)
 		{
 
@@ -3420,7 +3419,7 @@ void	TCD1304_Task(void const * argument)
  8001b04:	f002 fc16 	bl	8004334 <HAL_TIM_PWM_Init>
  8001b08:	b118      	cbz	r0, 8001b12 <TCD1304_Init+0x52>
 		Error_Handler();
- 8001b0a:	213a      	movs	r1, #58	; 0x3a
+ 8001b0a:	2137      	movs	r1, #55	; 0x37
  8001b0c:	4810      	ldr	r0, [pc, #64]	; (8001b50 <TCD1304_Init+0x90>)
  8001b0e:	f7ff fadb 	bl	80010c8 <_Error_Handler>
 	sConfigPWM.OCMode     = TIM_OCMODE_PWM1;
@@ -3444,8 +3443,8 @@ void	TCD1304_Task(void const * argument)
 	if(HAL_TIM_PWM_ConfigChannel(&Tim3PWMHandle, &sConfigPWM, TIM_CHANNEL_1) != HAL_OK){
  8001b24:	f002 fc50 	bl	80043c8 <HAL_TIM_PWM_ConfigChannel>
  8001b28:	b118      	cbz	r0, 8001b32 <TCD1304_Init+0x72>
-		  Error_Handler();
- 8001b2a:	2144      	movs	r1, #68	; 0x44
+		Error_Handler();
+ 8001b2a:	2140      	movs	r1, #64	; 0x40
  8001b2c:	4808      	ldr	r0, [pc, #32]	; (8001b50 <TCD1304_Init+0x90>)
  8001b2e:	f7ff facb 	bl	80010c8 <_Error_Handler>
 }
@@ -3478,7 +3477,7 @@ void	TCD1304_Task(void const * argument)
  8001b66:	f002 fcb7 	bl	80044d8 <HAL_TIM_PWM_Start_IT>
  8001b6a:	b128      	cbz	r0, 8001b78 <TCD1304_Start+0x20>
 		Error_Handler();
- 8001b6c:	2152      	movs	r1, #82	; 0x52
+ 8001b6c:	214e      	movs	r1, #78	; 0x4e
  8001b6e:	4806      	ldr	r0, [pc, #24]	; (8001b88 <TCD1304_Start+0x30>)
 }
  8001b70:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
@@ -4187,9 +4186,9 @@ void	BSP_Flash_WriteData()
  8001f64:	20015328 	.word	0x20015328
 
 08001f68 <BSP_Flash_ReadData>:
-/**
-  * @brief  The application entry point.
-  * @retval None
+  * @brief  Функция чтения сохраненного спектра из Flash памяти
+  * @param	channel: Номер спектрального канала
+  * @retval Указатель на массив спектра
   */
 uint32_t	*BSP_Flash_ReadData(uint8_t	channel)
 {

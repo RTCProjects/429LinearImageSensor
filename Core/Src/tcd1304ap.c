@@ -44,11 +44,8 @@ void	TCD1304_Init()
 	sensorTaskHandle = osThreadCreate(osThread(sensorTask), NULL);
 	/*
 	 * Входная частота APB1 - 84Mhz
-	 *
 	 */
-
 	Tim3PWMHandle.Instance = TIM3;
-
 	Tim3PWMHandle.Init.Prescaler     = 4;
 	Tim3PWMHandle.Init.Period        = 200 - 1;
 	Tim3PWMHandle.Init.ClockDivision = 0;
@@ -61,12 +58,11 @@ void	TCD1304_Init()
 	sConfigPWM.OCMode     = TIM_OCMODE_PWM1;
 	sConfigPWM.OCPolarity = TIM_OCPOLARITY_HIGH;
 	sConfigPWM.OCFastMode = TIM_OCFAST_DISABLE;
-
 	sConfigPWM.Pulse = 100;
 
 	if(HAL_TIM_PWM_ConfigChannel(&Tim3PWMHandle, &sConfigPWM, TIM_CHANNEL_1) != HAL_OK){
-		  Error_Handler();
-		}
+		Error_Handler();
+	}
 }
 /*----------------------------------------------------------------------------------------------------*/
 /**
@@ -99,7 +95,6 @@ void	TCD1304_Stop()
 void	TCD1304_Task(void const * argument)
 {
 		portBASE_TYPE			 xStatus;
-
 		while(1)
 		{
 
